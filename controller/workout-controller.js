@@ -1,8 +1,8 @@
-const db = require("../models/index.js");
+const Workout = require("../models/index.js");
 
 module.exports = {
   getWorkout: async (req, res) => {
-    const lastWorkout = await db.Workout.find();
+    const lastWorkout = await Workout.find();
     try {
       res.send(lastWorkout);
     } catch (err) {
@@ -11,7 +11,7 @@ module.exports = {
   },
 
   getWorkoutRange: async (req, res) => {
-    const workoutRange = await db.Workout.find();
+    const workoutRange = await Workout.find();
     try {
       res.send(workoutRange);
     } catch (err) {
@@ -20,7 +20,7 @@ module.exports = {
   },
 
   addExercise: async (req, res) => {
-    db.Workout.findById(req.params.id, async (err, data) => {
+    Workout.findById(req.params.id, async (err, data) => {
       if (err) {
         console.log(err);
       } else {
@@ -47,7 +47,7 @@ module.exports = {
   },
 
   addWorkout: async (req, res) => {
-    const newWorkout = new db.Workout({
+    const newWorkout = new Workout({
       day: new Date().setDate(new Date().getDate()),
     });
 
