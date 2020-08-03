@@ -17,6 +17,7 @@ mongoose.connection.on("error", (err) => {
 mongoose.connection.on("connected", (err, res) => {
   console.log("mongoose is connected");
 });
+console.log(`connected to ${MONGODB_URI}`);
 
 const PORT = process.env.PORT || 3000;
 const app = express();
