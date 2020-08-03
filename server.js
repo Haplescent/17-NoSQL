@@ -2,10 +2,15 @@ const express = require("express");
 const mongoose = require("mongoose");
 // const db = require("./models/index.js");
 
-mongoose.connect("mongodb://localhost/workout_db", {
+var MONGODB_URI = process.env.MONGODB_URL || "mongodb://localhost/workout_db";
+
+const options = {
   useNewUrlParser: true,
+  useCreateIndex: true,
   useFindAndModify: false,
-});
+  family: 4, // Use IPv4, skip trying IPv6
+};
+mongoose.connect(MONGODB_URI, options);
 
 mongoose.connection.on("error", (err) => {
   console.log("err", err);
