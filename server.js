@@ -1,14 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config();
 // const db = require("./models/index.js");
 
 var MONGODB_URI = process.env.MONGODB_URL || "mongodb://localhost/workout_db";
 
 const options = {
   useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-  family: 4, // Use IPv4, skip trying IPv6
+  useUnifiedTopology: true,
 };
 mongoose.connect(MONGODB_URI, options);
 
