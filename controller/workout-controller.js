@@ -1,11 +1,19 @@
-const Workout = require("../models/index.js");
+const db = require("../models/index.js");
 
 module.exports = {
-  getWorkouts: async (req, res) => {
-    const Workouts = await Workout.find();
-
+  getWorkout: async (req, res) => {
+    const lastWorkout = await db.Workout.find();
     try {
-      res.send(Workouts);
+      res.send(lastWorkout);
+    } catch (err) {
+      res.send(err);
+    }
+  },
+
+  getWorkoutRange: async (req, res) => {
+    const workoutRange = await db.Workout.find();
+    try {
+      res.send(workoutRange);
     } catch (err) {
       res.send(err);
     }
@@ -25,23 +33,23 @@ module.exports = {
     }
   },
 
-  //   deleteWorkout: async (req, res) => {
-  //     Workout.findByIdAndDelete(req.body._id);
-  //     try {
-  //       res.send(Workout);
-  //     } catch (err) {
-  //       res.send(err);
-  //     }
-  //   },
+  deleteWorkout: async (req, res) => {
+    Workout.findByIdAndDelete(req.body._id);
+    try {
+      res.send(Workout);
+    } catch (err) {
+      res.send(err);
+    }
+  },
 
-  //   addWorkout: async (req, res) => {
-  //     const newWorkout = new Workout({ name: req.body.name });
+  addWorkout: async (req, res) => {
+    const newWorkout = new Workout({ name: req.body.name });
 
-  //     try {
-  //       await newWorkout.save();
-  //       res.send(newWorkout);
-  //     } catch (err) {
-  //       res.send(err);
-  //     }
-  //   },
+    try {
+      await newWorkout.save();
+      res.send(newWorkout);
+    } catch (err) {
+      res.send(err);
+    }
+  },
 };
