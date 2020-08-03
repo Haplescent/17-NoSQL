@@ -13,7 +13,7 @@ db.once("open", function () {
 });
 
 const workoutSchema = new mongoose.Schema({
-  date: Date,
+  day: Date,
   exercises: Array,
 });
 

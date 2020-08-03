@@ -19,18 +19,22 @@ module.exports = {
     }
   },
 
-  addWorkout: async (req, res) => {
-    const newWorkout = new Workout({
-      date: req.body.date,
-      exercises: req.body.exercises,
+  addExercise: async (req, res) => {
+    db.Workout.findById(req.params.id, async (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(data);
+        data.exercises.push(req.body);
+        data.day = new Date().setDate(new Date().getDate());
+        try {
+          await data.save();
+          res.send(data);
+        } catch (err) {
+          res.send(err);
+        }
+      }
     });
-
-    try {
-      await newWorkout.save();
-      res.send(newWorkout);
-    } catch (err) {
-      res.send(err);
-    }
   },
 
   deleteWorkout: async (req, res) => {
@@ -43,7 +47,9 @@ module.exports = {
   },
 
   addWorkout: async (req, res) => {
-    const newWorkout = new Workout({ name: req.body.name });
+    const newWorkout = new db.Workout({
+      day: new Date().setDate(new Date().getDate()),
+    });
 
     try {
       await newWorkout.save();
