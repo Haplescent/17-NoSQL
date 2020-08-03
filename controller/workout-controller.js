@@ -12,7 +12,10 @@ module.exports = {
   },
 
   addWorkout: async (req, res) => {
-    const newWorkout = new Workout({ name: req.body.name });
+    const newWorkout = new Workout({
+      date: req.body.date,
+      exercises: req.body.exercises,
+    });
 
     try {
       await newWorkout.save();

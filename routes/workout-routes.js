@@ -1,9 +1,9 @@
 const workoutController = require("../controller/workout-controller.js");
 
 module.exports = function (app) {
-  app.get("/Workout", workoutController.getWorkouts);
+  app.get("/api/workouts", workoutController.getWorkouts);
 
-  app.post("/newWorkout", workoutController.addWorkout);
+  app.post("/api/workouts", workoutController.addWorkout);
 
   //   app.delete("/deleteWorkout", workoutController.deleteWorkout);
 
